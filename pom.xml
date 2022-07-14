@@ -16,7 +16,7 @@
 	<description>Demo project 1</description>
 	<properties>
 		<java.version>11</java.version>
-		<spring-cloud.version>2020.0.2</spring-cloud.version>
+		<!--spring-cloud.version>2020.0.2</spring-cloud.version-->
 	</properties>
 	<dependencies>
 		<dependency>
@@ -108,24 +108,24 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
+		<!--dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
-		<dependency>
-		    <groupId>org.powermock</groupId>
-		    <artifactId>powermock-api-mockito-common</artifactId>     
-		    <version>1.6.5</version>
-		</dependency>
+		</dependency-->
+		<!--dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-mockito-common</artifactId>
+			<version>1.6.5</version>
+		</dependency-->
 		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
-		<dependency>
-		    <groupId>org.junit.jupiter</groupId>
-		    <artifactId>junit-jupiter-engine</artifactId>
-		    <version>5.9.0-RC1</version>
-		    <scope>test</scope>
-		</dependency>
+		<!-- dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.9.0-RC1</version>
+			<scope>test</scope>
+		</dependency-->
 	</dependencies>
-	<dependencyManagement>
+	<!--dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
@@ -135,7 +135,7 @@
 				<scope>import</scope>
 			</dependency>
 		</dependencies>
-	</dependencyManagement>
+	</dependencyManagement-->
 
 
 	<build>

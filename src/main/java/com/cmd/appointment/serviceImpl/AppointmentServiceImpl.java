@@ -24,11 +24,6 @@ public class AppointmentServiceImpl implements AppointmentService {
 	@Autowired
 	private AppointmentMapper appointmentMapper;
 
-	public AppointmentServiceImpl(AppointmentRepository appRepo) {
-		// TODO Auto-generated constructor stub
-	this.aprepo=appRepo;
-	}
-
 	@Override
 	public Appointment saveAppointment(Appointment appointment) throws AppointmentAlreadyExistException {
 		// TODO Auto-generated method stub
