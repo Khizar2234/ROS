@@ -13,52 +13,43 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.cmd.appointment.entities.Appointment;
 import com.cmd.appointment.entities.Doctor;
 import com.cmd.appointment.entities.Patient;
-import com.cmd.appointment.entities.Vital;
-import com.cmd.appointment.repository.VitalRepository;
-import com.cmd.appointment.service.VitalService;
-import com.cmd.appointment.serviceImpl.VitalServiceImpl;
+import com.cmd.appointment.entities.Symptom;
+import com.cmd.appointment.repository.SymptomRepository;
+import com.cmd.appointment.service.SymptomService;
+import com.cmd.appointment.serviceImpl.SymptomServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
-public class VitalTestCases {
+public class SymptomTestCases {
 
 	@Mock
-	private VitalRepository vrepo;
+	private SymptomRepository sRepo;
 	
-	VitalService vitalService;
+	SymptomService symptomService;
 	
 	@BeforeEach
 	void initUseCase() {
 		
-		vitalService = new VitalServiceImpl(vrepo);
+		symptomService = new SymptomServiceImpl(sRepo);
 	}
 	
 	@Test
-	public void addVitalTest() {
+	public void addSymptomTest() {
 		
 		Doctor doctor = new Doctor(0,"sad", 2134567, "saf","sdasf", "asfdsggf",0);
 		
 		Patient patient = new Patient(0, "saf", 30,"asfa","asd","asd","adsa",1242346,132, "aD", "SDA", "dfsdg", "dfsdf");
 		
 		Appointment appointment = new Appointment(0, "sdafd", "asd", "sadad", "sadfas",doctor,patient);
-//		
-		Vital vital = new Vital();
-		vital.setVitalId(6);
-		vital.setTemperature(30);
-		vital.setRespirationRate(98);
-		vital.setECG(90);
-		vital.setDiabetes(100);
-		vital.setAppointment(appointment);
 		
-		when(vrepo.save(any(Vital.class))).thenReturn(vital);
-		Vital savedVital = vrepo.save(vital);
-		assertThat(savedVital.getVitalId()).isNotNull();
+		Symptom symptom = new Symptom();
+		
+		symptom.setSymptomId(0);
+		symptom.setSymptomName("Fever");
+		symptom.setAppointment(appointment);
+		
+		when(sRepo.save(any(Symptom.class))).thenReturn(symptom);
+		Symptom savedSymptom = sRepo.save(symptom);
+		assertThat(savedSymptom.getSymptomId()).isNotNull();
 	}
 	
-//	@Test
-//	public void viewVitalByAppointmentId() {
-//		
-//		com.cmd.appointment.entities.Vital newvital = vrepo.getVitalsByAppId(2);
-//		assertThat(newvital.getVitalId()).isNotNull();
-//	}
-
 }

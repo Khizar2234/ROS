@@ -1,7 +1,6 @@
 package com.example.demo;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -13,7 +12,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.cmd.appointment.dtos.AppointmentDto;
 import com.cmd.appointment.entities.Appointment;
+import com.cmd.appointment.entities.Doctor;
+import com.cmd.appointment.entities.Patient;
+import com.cmd.appointment.entities.Prescription;
 import com.cmd.appointment.repository.TestRepository;
 import com.cmd.appointment.service.TestService;
 import com.cmd.appointment.serviceImpl.TestServiceImpl;
@@ -35,11 +38,11 @@ public class TestTestCases {
 	@Test
 	public void addTestTest() {
 		
-//		Doctor doctor = new Doctor(0,"sad", 2134567, "saf","sdasf", "asfdsggf",0);
+		Doctor doctor = new Doctor(0,"sad", 2134567, "saf","sdasf", "asfdsggf",0);
 		
-//		Patient patient = new Patient(0, "saf", 30,"asfa","asd","asd","adsa",1242346,132, "aD", "SDA", "dfsdg", "dfsdf");
+		Patient patient = new Patient(0, "saf", 30,"asfa","asd","asd","adsa",1242346,132, "aD", "SDA", "dfsdg", "dfsdf");
 		
-		Appointment appointment = new Appointment(0, "sdafd", "asd", "sadad", "sadfas",132412,123124);
+		Appointment appointment = new Appointment(0, "sdafd", "asd", "sadad", "sadfas",doctor,patient);
 		
 		com.cmd.appointment.entities.Test test = new com.cmd.appointment.entities.Test();
 		test.setTestId(0);

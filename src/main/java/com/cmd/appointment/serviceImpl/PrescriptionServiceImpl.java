@@ -1,13 +1,14 @@
 package com.cmd.appointment.serviceImpl;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cmd.appointment.dtos.AppointmentDto;
 import com.cmd.appointment.dtos.PrescriptionDto;
+import com.cmd.appointment.entities.Appointment;
 import com.cmd.appointment.entities.Prescription;
 import com.cmd.appointment.exception.AppointmentNotFoundException;
 import com.cmd.appointment.exception.PrescriptionAlreadyExistException;

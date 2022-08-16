@@ -38,11 +38,11 @@ public class PrescriptionTestCases {
 	@Test
 	public void addPreTest() {
 		
-//		Doctor doctor = new Doctor(0,"sad", 2134567, "saf","sdasf", "asfdsggf", 0);
+		Doctor doctor = new Doctor(0,"sad", 2134567, "saf","sdasf", "asfdsggf", 0);
 		
-//		Patient patient = new Patient(0, "saf", 30,"asfa","asd","asd","adsa",1242346,132, "aD", "SDA", "dfsdg", "dfsdf");
+		Patient patient = new Patient(0, "saf", 30,"asfa","asd","asd","adsa",1242346,132, "aD", "SDA", "dfsdg", "dfsdf");
 		
-		Appointment appointment = new Appointment(0, "sdafd", "asd", "sadad", "sadfas",132412,123124);
+		Appointment appointment = new Appointment(0, "sdafd", "asd", "sadad", "sadfas",doctor,patient);
 		
 		Prescription prescription = new Prescription();
 		prescription.setPrescriptionId(0);

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.cmd.appointment.dtos.AppointmentDto;
 import com.cmd.appointment.entities.Appointment;
+import com.cmd.appointment.entities.Patient;
 import com.cmd.appointment.exception.AppointmentAlreadyExistException;
 import com.cmd.appointment.exception.AppointmentNotFoundException;
 

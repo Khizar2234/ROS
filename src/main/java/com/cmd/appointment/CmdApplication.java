@@ -47,6 +47,11 @@ public class CmdApplication {
 		return new RecommendationMapperImpl();
 	}
 
+//	@Bean
+//	public SymptomMapper getSymptomMapper() {
+//		return new SymptomMapperImpl();
+//	}
+
 	@Bean
 	public TestMapper getTestMapper() {
 		return new TestMapperImpl();

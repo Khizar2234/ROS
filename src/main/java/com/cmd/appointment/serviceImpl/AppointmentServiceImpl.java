@@ -72,7 +72,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 					if (doctors[j].getDoctorId() == docId) {
 
 						appointment.setDoctorId(docId);
-
+						
 						appointment.setStatus("Pending");
 
 						aprepo.save(appointment);
@@ -305,7 +305,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 			return appointmentDtos;
 		}
 	}
-
+	
 	@Override
 	public List<Appointment> viewAllAppointmentsByDoctorId(long id1) throws AppointmentNotFoundException {
 
@@ -321,7 +321,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 			if (doctors[i].getDoctorId() == id1) {
 
 				appoint = aprepo.viewAllAppointmentsForDoctor(id1);
-
+				
 				flag = true;
 
 			}
