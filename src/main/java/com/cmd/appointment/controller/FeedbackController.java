@@ -23,9 +23,6 @@ import io.swagger.v3.oas.annotations.Operation;
 @RestController
 @RequestMapping("/FeedbackController")
 public class FeedbackController {
-
-//	@Autowired
-//	private FeedbackService fbservice;
 	
 	@Autowired
 	private RestTemplate restTemplate;

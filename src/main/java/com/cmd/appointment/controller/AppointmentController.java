@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cmd.appointment.entities.Appointment;
 import com.cmd.appointment.exception.AppointmentAlreadyExistException;
 import com.cmd.appointment.exception.AppointmentNotFoundException;
+import com.cmd.appointment.exception.DoctorNotFoundException;
 import com.cmd.appointment.service.AppointmentService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -39,10 +40,10 @@ public class AppointmentController {
 		ResponseEntity<?> response = null;
 		try {
 			response = new ResponseEntity<>(appService.saveAppointment(patId,docId,appointment), HttpStatus.OK);
-		} catch (AppointmentAlreadyExistException e) {
+		} catch (AppointmentAlreadyExistException | DoctorNotFoundException e) {
 			// TODO Auto-generated catch block
-			response =  new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
-		}
+			e.printStackTrace();
+		};
 		return response;
 	}
 

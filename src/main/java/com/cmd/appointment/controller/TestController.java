@@ -1,6 +1,7 @@
 package com.cmd.appointment.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,10 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cmd.appointment.entities.Test;
-import com.cmd.appointment.entities.Vital;
 import com.cmd.appointment.exception.AppointmentNotFoundException;
 import com.cmd.appointment.exception.TestNotFoundException;
-import com.cmd.appointment.exception.VitalNotFoundException;
 import com.cmd.appointment.service.TestService;
 
 import io.swagger.v3.oas.annotations.Operation;

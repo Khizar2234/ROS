@@ -15,6 +15,7 @@ import com.cmd.appointment.entities.Doctor;
 import com.cmd.appointment.entities.Patient;
 import com.cmd.appointment.exception.AppointmentAlreadyExistException;
 import com.cmd.appointment.exception.AppointmentNotFoundException;
+import com.cmd.appointment.exception.DoctorNotFoundException;
 import com.cmd.appointment.mapper.AppointmentMapper;
 import com.cmd.appointment.repository.AppointmentRepository;
 import com.cmd.appointment.service.AppointmentService;
@@ -46,17 +47,17 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 	@Override
 	public Appointment saveAppointment(long patientId, long docId, Appointment appointment)
-			throws AppointmentAlreadyExistException {
+			throws AppointmentAlreadyExistException, DoctorNotFoundException {
 		// TODO Auto-generated method stub
 
 //			Doctor doctor = docRepo.findById(docId).get();
 //			appointment.setDoctor(doctor);
-		String URL = "http://localhost:8003/settings_patient/getPatients";
+		String URL = "http://localhost:8094/setting/settings_patient/getPatients";
 
 		ResponseEntity<Patient[]> response = restTemplate.getForEntity(URL, Patient[].class);
 		Patient[] patients = response.getBody();
 
-		String URL1 = "http://localhost:8003/settings_doctor/getDoctor";
+		String URL1 = "http://localhost:8094/setting/settings_doctor/getDoctor";
 
 		ResponseEntity<Doctor[]> response1 = restTemplate.getForEntity(URL1, Doctor[].class);
 		Doctor[] doctors = response1.getBody();
@@ -72,11 +73,14 @@ public class AppointmentServiceImpl implements AppointmentService {
 					if (doctors[j].getDoctorId() == docId) {
 
 						appointment.setDoctorId(docId);
-						
+
 						appointment.setStatus("Pending");
 
 						aprepo.save(appointment);
 
+					}
+					else {
+						throw new DoctorNotFoundException("Doctor not Found");
 					}
 
 				}
@@ -305,7 +309,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 			return appointmentDtos;
 		}
 	}
-	
+
 	@Override
 	public List<Appointment> viewAllAppointmentsByDoctorId(long id1) throws AppointmentNotFoundException {
 
@@ -321,7 +325,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 			if (doctors[i].getDoctorId() == id1) {
 
 				appoint = aprepo.viewAllAppointmentsForDoctor(id1);
-				
+
 				flag = true;
 
 			}

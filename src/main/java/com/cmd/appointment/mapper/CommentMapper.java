@@ -9,7 +9,6 @@ import com.cmd.appointment.entities.Comment;
 @Mapper
 public interface CommentMapper {
 
-//	@Mapping(source = "commentId", target = "commentId")
 	@Mapping(source = "commentDesc", target = "commentDesc")
 	public CommentDto convertToDto(Comment comment);
 }
