@@ -1,10 +1,10 @@
 package com.cmd.appointment.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,12 +27,12 @@ public class CommentController {
 	@Autowired
 	private CommentService comService;
 	
-	@PostMapping("/Comment/{appId}")
+	@PostMapping("/AddComment")
 	@Operation(summary = "To add Comment")
-	public ResponseEntity<?> postComment(@PathVariable long appId, @RequestBody Comment comment) {
+	public ResponseEntity<?> postComment(@RequestBody Comment comment) {
 		ResponseEntity<?> response = null;
 		try {
-			response = new ResponseEntity<>(comService.addComment(appId, comment), HttpStatus.OK);
+			response = new ResponseEntity<>(comService.addComment(comment), HttpStatus.OK);
 		} catch (CommentAlreadyExistException e) {
 			// TODO Auto-generated catch block
 			response =  new ResponseEntity<>(e.getMessage(), HttpStatus.OK);

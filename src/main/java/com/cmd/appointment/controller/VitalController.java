@@ -27,12 +27,12 @@ public class VitalController {
 	@Autowired
 	private VitalService vitService;
 
-	@PostMapping("/addVital/{appId}")
+	@PostMapping("/addVital")
 	@Operation(summary = "to add Vital for appointment")
-	public ResponseEntity<?> addVital(@PathVariable long appId, @RequestBody Vital vital) {
+	public ResponseEntity<?> addVital(@RequestBody Vital vital) {
 		ResponseEntity<?> response = null;
 		try {
-			response = new ResponseEntity<>(vitService.addvital(appId, vital), HttpStatus.OK);
+			response = new ResponseEntity<>(vitService.addvital(vital), HttpStatus.OK);
 		} catch (Exception e) {
 			response = new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
 		}

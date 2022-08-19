@@ -22,6 +22,6 @@ public class Recommendation {
 	private long doctorId;
 	
 	@OneToOne
-	@JoinColumn(name = "appointmentId", unique = true)
+	@JoinColumn(name = "appointmentId")
 	private Appointment appointment;
 }

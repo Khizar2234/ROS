@@ -27,12 +27,12 @@ public class RecommendationController {
 	@Autowired
 	private RecommendationService recSer;
 
-	@PostMapping("/recomendation/{docId}")
+	@PostMapping("/recomendation")
 	@Operation(summary = "To add recomendation")
-	public ResponseEntity<?> post(@PathVariable long docId,  @RequestBody Recommendation recomendation) {
+	public ResponseEntity<?> post(@RequestBody Recommendation recomendation) {
 		ResponseEntity<?> response = null;
 		try {
-			response = new ResponseEntity<>(recSer.addRecomendation(docId,recomendation), HttpStatus.OK);
+			response = new ResponseEntity<>(recSer.addRecomendation(recomendation), HttpStatus.OK);
 		} catch (RecommendationAlreadyExistException e) {
 			// TODO Auto-generated catch block
 			response =  new ResponseEntity<>(e.getMessage(), HttpStatus.OK);

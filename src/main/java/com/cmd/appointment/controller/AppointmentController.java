@@ -16,6 +16,7 @@ import com.cmd.appointment.entities.Appointment;
 import com.cmd.appointment.exception.AppointmentAlreadyExistException;
 import com.cmd.appointment.exception.AppointmentNotFoundException;
 import com.cmd.appointment.exception.DoctorNotFoundException;
+import com.cmd.appointment.exception.PatientNotFoundException;
 import com.cmd.appointment.service.AppointmentService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,20 +31,32 @@ public class AppointmentController {
 	@GetMapping("/Appointment/getAllApoointment")
 	public ResponseEntity<?> getAllAppointments() {
 		ResponseEntity<?> response = null;
-		response = new ResponseEntity<>(appService.getAllAppointment(), HttpStatus.OK);
+		try {
+			response = new ResponseEntity<>(appService.getAllAppointment(), HttpStatus.OK);
+		} catch (AppointmentNotFoundException e) {
+			// TODO Auto-generated catch block
+			response = new ResponseEntity<String>(e.getMessage() ,HttpStatus.OK);
+		}
 		return response;
 	}
 	
-	@PostMapping("/Appointment/{patId}/{docId}")
+	@PostMapping("/SaveAppointment")
 	@Operation(summary = "to save appointment")
-	public ResponseEntity<?> postAppointment(@PathVariable(value = "patId") Long patId,@PathVariable(value = "docId") Long docId, @RequestBody Appointment appointment) {
+	public ResponseEntity<?> postAppointment(@RequestBody Appointment appointment) {
 		ResponseEntity<?> response = null;
 		try {
-			response = new ResponseEntity<>(appService.saveAppointment(patId,docId,appointment), HttpStatus.OK);
-		} catch (AppointmentAlreadyExistException | DoctorNotFoundException e) {
+			response = new ResponseEntity<>(appService.saveAppointment(appointment), HttpStatus.OK);
+		} catch (AppointmentAlreadyExistException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			response = new ResponseEntity<String>(e.getMessage() ,HttpStatus.OK);
+		} catch (DoctorNotFoundException e) {
+			// TODO Auto-generated catch block
+			response = new ResponseEntity<String>(e.getMessage() ,HttpStatus.OK);
+		} catch (PatientNotFoundException e) {
+			// TODO Auto-generated catch block
+			response = new ResponseEntity<String>(e.getMessage() ,HttpStatus.OK);
 		};
+		
 		return response;
 	}
 

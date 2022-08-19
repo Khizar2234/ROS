@@ -30,19 +30,18 @@ public class TestServiceImpl implements TestService {
 
 	public TestServiceImpl(TestRepository trepo) {
 		// TODO Auto-generated constructor stub
-		this.testRepo = testRepo;
+		this.testRepo = trepo;
 	}
 
 	@Override
 	public Test saveTest(Test test) throws TestAlreadyExistException {
 		// TODO Auto-generated method stub
-		Test test1 = null;
 		if (testRepo.existsById(test.getTestId())) {
 			throw new TestAlreadyExistException("Test already exists. Please add new one..");
 		} else {
-			test1 = testRepo.save(test);
+			testRepo.save(test);
 		}
-		return test1;
+		return test;
 	}
 
 	@Override

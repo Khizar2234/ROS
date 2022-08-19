@@ -7,13 +7,13 @@ import com.cmd.appointment.exception.VitalAlreadyExistException;
 import com.cmd.appointment.exception.VitalNotFoundException;
 
 public interface VitalService {
-	
+
 	public VitalDto viewVitalByAppId(long aid) throws AppointmentNotFoundException;
-	
-	public Vital addvital(long appId, Vital vital) throws VitalAlreadyExistException;
+
+	public Vital addvital(Vital vital) throws VitalAlreadyExistException;
 
 	public Vital editvitals(Vital vital) throws VitalNotFoundException;
 
 	public String DeleteVital(long id) throws VitalNotFoundException;
-	
+
 }

@@ -30,26 +30,31 @@ public class CommentServiceImpl implements CommentService {
 	private CommentMapper commentMapper;
 	
 	@Override
-	public List<Comment> getAllComments() {
+	public List<Comment> getAllComments() throws CommentNotFoundException {
 		// TODO Auto-generated method stub
-		List<Comment> comments = comRepo.getAllComment();
+		List<Comment> comments = null;
+		if(comRepo.getAllComment() != null) {
+			comments = comRepo.getAllComment();
+		}
+		else {
+			throw new CommentNotFoundException("Comment Not Found");
+		}
 		return comments;
 	}
 	
 	@Override
-	public Comment addComment(long appId, Comment comment) throws CommentAlreadyExistException {
+	public Comment addComment(Comment comment) throws CommentAlreadyExistException {
 		// TODO Auto-generated method stub
-		Comment comment1 = null;
+		long appId = comment.getAppointment().getAppointmentId();
 		if (comRepo.getCommentByAppId(appId) != null) {
 			throw new CommentAlreadyExistException("Comment already exists");
 		} else {
-			Appointment appointment = null;
-			appointment =  appRepo.getOne(appId);
+			 Appointment appointment = appRepo.findById(appId).get();
 			// TODO: handle exception
-			comment1.setAppointment(appointment);
-			comment1 = comRepo.save(comment);
+			comment.setAppointment(appointment);
+			comRepo.save(comment);
 		}
-		return comment1;
+		return comment;
 	}
 
 	@Override

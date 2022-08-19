@@ -32,14 +32,14 @@ public class VitalServiceImpl implements VitalService {
 	}
 
 	@Override
-	public Vital addvital(long appId, Vital vital) throws VitalAlreadyExistException {
+	public Vital addvital(Vital vital) throws VitalAlreadyExistException {
 		// TODO Auto-generated method stub
-		Vital vital1 = null;
+		long appId = vital.getAppointment().getAppointmentId();
 		if (vrepo.getVitalsByAppId(appId) != null) {
-			throw new VitalAlreadyExistException("Vital already exists. Please add new one..");
+			throw new VitalAlreadyExistException("Vital already exists");
 		} else {
-			vital1 = vrepo.save(vital);
-			return vital1;
+			vrepo.save(vital);
+			return vital;
 		}	
 	}
 

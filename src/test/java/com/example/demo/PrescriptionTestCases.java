@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -14,8 +13,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.cmd.appointment.entities.Appointment;
-import com.cmd.appointment.entities.Doctor;
-import com.cmd.appointment.entities.Patient;
 import com.cmd.appointment.entities.Prescription;
 import com.cmd.appointment.repository.PrescriptionRepository;
 import com.cmd.appointment.service.PrescriptionService;

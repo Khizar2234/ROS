@@ -31,11 +31,15 @@ public class RecommendationServiceImpl implements RecommendationService {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	public Recommendation addRecomendation(long docId, Recommendation recomendation)
+	@Override
+	public Recommendation addRecomendation(Recommendation recomendation)
 			throws RecommendationAlreadyExistException {
+		
+		long docId = recomendation.getDoctorId();
+		
 		// TODO Auto-generated method stub
-		if (reRepo.getReccomendationByAppId(recomendation.getRecommendationId()) != null) {
-			throw new RecommendationAlreadyExistException("Recommendation already exists. Please add new one..");
+		if (reRepo.getReccomendationByAppId(recomendation.getAppointment().getAppointmentId()) != null) {
+			throw new RecommendationAlreadyExistException("Recommendation already exists");
 		} else {
 
 			String URL1 = "http://localhost:8003/settings_doctor/getDoctor";

@@ -23,6 +23,6 @@ public class Comment {
 	private String commentDesc;
 	
 	@OneToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "appointmentId", unique = true)
+	@JoinColumn(name = "appointmentId")
 	private Appointment appointment;
 }

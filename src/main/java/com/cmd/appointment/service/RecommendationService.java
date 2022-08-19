@@ -8,9 +8,10 @@ import com.cmd.appointment.exception.RecommendationNotFoundException;
 
 public interface RecommendationService {
 
-	public Recommendation addRecomendation(long docId,Recommendation recomendation) throws RecommendationAlreadyExistException;
+	public Recommendation addRecomendation(Recommendation recomendation) throws RecommendationAlreadyExistException;
 
 	public String removeRecomendation(long id) throws RecommendationNotFoundException;
 
 	public RecommendationDto viewRecomendationByAppId(long aid) throws AppointmentNotFoundException;
+
 }

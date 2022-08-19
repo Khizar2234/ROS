@@ -7,10 +7,11 @@ import com.cmd.appointment.entities.Appointment;
 import com.cmd.appointment.exception.AppointmentAlreadyExistException;
 import com.cmd.appointment.exception.AppointmentNotFoundException;
 import com.cmd.appointment.exception.DoctorNotFoundException;
+import com.cmd.appointment.exception.PatientNotFoundException;
 
 public interface AppointmentService {
 
-	public List<Appointment> getAllAppointment();
+	public List<Appointment> getAllAppointment() throws AppointmentNotFoundException;
 	
 	public int viewAllAcceptedAppointmentSummary() throws AppointmentNotFoundException;
 
@@ -38,8 +39,8 @@ public interface AppointmentService {
 
 	public Appointment CloseAppointment(long id) throws AppointmentNotFoundException;
 
-	public Appointment saveAppointment(long patientId, long docId, Appointment appointment)
-			throws AppointmentAlreadyExistException, DoctorNotFoundException;
+	public Appointment saveAppointment(Appointment appointment)
+			throws AppointmentAlreadyExistException, DoctorNotFoundException, PatientNotFoundException;
 
 	
 

@@ -14,11 +14,11 @@ import com.cmd.appointment.exception.CommentNotFoundException;
 public interface CommentService {
 
 //	public Comment addCommentToAppointment(Comment comment, long appId);
-	public List<Comment> getAllComments();
+	public List<Comment> getAllComments() throws CommentNotFoundException;
 	
 	public Comment editComment(Comment comment) throws CommentNotFoundException;
 
-	public Comment addComment(long appId, Comment comment) throws CommentAlreadyExistException;
+	public Comment addComment(Comment comment) throws CommentAlreadyExistException;
 	
 	public CommentDto viewCommentByAppId(long aid) throws AppointmentNotFoundException;	
 }

@@ -16,6 +16,7 @@ import com.cmd.appointment.entities.Patient;
 import com.cmd.appointment.exception.AppointmentAlreadyExistException;
 import com.cmd.appointment.exception.AppointmentNotFoundException;
 import com.cmd.appointment.exception.DoctorNotFoundException;
+import com.cmd.appointment.exception.PatientNotFoundException;
 import com.cmd.appointment.mapper.AppointmentMapper;
 import com.cmd.appointment.repository.AppointmentRepository;
 import com.cmd.appointment.service.AppointmentService;
@@ -32,39 +33,53 @@ public class AppointmentServiceImpl implements AppointmentService {
 	@Autowired
 	private RestTemplate restTemplate;
 
+	String SettingURL = "http://localhost:8094/setting/";
+
 	public AppointmentServiceImpl(AppointmentRepository appRepo) {
 		// TODO Auto-generated constructor stub
 	}
 
-	String baseURL = "http://localhost:8001";
-
 	@Override
-	public List<Appointment> getAllAppointment() {
+	public List<Appointment> getAllAppointment() throws AppointmentNotFoundException {
 		// TODO Auto-generated method stub
 		List<Appointment> appointments = aprepo.getAllAppointments();
-		return appointments;
+		if (appointments.isEmpty()) {
+			throw new AppointmentNotFoundException("No Appointment Found");
+		} else {
+			return appointments;
+		}
 	}
 
 	@Override
-	public Appointment saveAppointment(long patientId, long docId, Appointment appointment)
-			throws AppointmentAlreadyExistException, DoctorNotFoundException {
+	public Appointment saveAppointment(Appointment appointment)
+			throws AppointmentAlreadyExistException, DoctorNotFoundException, PatientNotFoundException {
 		// TODO Auto-generated method stub
 
-//			Doctor doctor = docRepo.findById(docId).get();
-//			appointment.setDoctor(doctor);
-		String URL = "http://localhost:8094/setting/settings_patient/getPatients";
+		long patientId, docId;
+		
+		patientId = appointment.getPatientId();
+		
+		docId = appointment.getDoctorId();
+		
+		String URL = SettingURL + "settings_patient/getPatients";
 
 		ResponseEntity<Patient[]> response = restTemplate.getForEntity(URL, Patient[].class);
 		Patient[] patients = response.getBody();
 
-		String URL1 = "http://localhost:8094/setting/settings_doctor/getDoctor";
+		String URL1 = SettingURL + "settings_doctor/getDoctor";
 
 		ResponseEntity<Doctor[]> response1 = restTemplate.getForEntity(URL1, Doctor[].class);
 		Doctor[] doctors = response1.getBody();
 
+		boolean patFlag = false;
+
+		boolean docFlag = false;
+
 		for (int i = 0; i < patients.length; i++) {
 
 			if (patients[i].getPatientId() == patientId) {
+
+				patFlag = true;
 
 				appointment.setPatientId(patientId);
 
@@ -72,23 +87,32 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 					if (doctors[j].getDoctorId() == docId) {
 
+						docFlag = true;
+
 						appointment.setDoctorId(docId);
 
 						appointment.setStatus("Pending");
 
 						aprepo.save(appointment);
 
-					}
-					else {
-						throw new DoctorNotFoundException("Doctor not Found");
+						System.out.println("Appointment Saved Succesfully");
+
+						break;
+
 					}
 
 				}
 
 			}
-
 		}
 
+		if (patFlag == false) {
+			throw new PatientNotFoundException("Patient Not Found");
+		}
+
+		if (docFlag == false) {
+			throw new DoctorNotFoundException("Doctor Not Found");
+		}
 		return appointment;
 //			String response = restTemplate.getForObject(URL, String.class);
 //
@@ -313,7 +337,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 	@Override
 	public List<Appointment> viewAllAppointmentsByDoctorId(long id1) throws AppointmentNotFoundException {
 
-		String URL1 = "http://localhost:8003/settings_doctor/getDoctor";
+		String URL1 = SettingURL + "settings_doctor/getDoctor";
 
 		boolean flag = false;
 
